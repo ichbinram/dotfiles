@@ -41,7 +41,7 @@ get_icon() {
     echo $icon
 }
 
-KEY="9d7a1633dada8c7306f02822706efa1b"
+KEY=""
 CITY="Braunschweig"
 UNITS="metric"
 SYMBOL="°"
