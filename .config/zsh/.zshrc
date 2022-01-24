@@ -27,6 +27,8 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 #bindkey -v
 
 # Prompt settings
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+autoload -Uz compinit && compinit
 autoload promptinit
 promptinit
 #prompt bigfade
@@ -43,13 +45,13 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 . $HOME/.config/zsh/send.zsh
 
 # Fortune | Cowsay
-source $HOME/.config/zsh/plugins/cow-fortune.zsh
+#source $HOME/.config/zsh/plugins/cow-fortune.zsh
 
 # Autosuggestion(fish)
 source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #zsh-autocomplete
-source $HOME/.config/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+#source $HOME/.config/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # Fast syntax-highlighting
 source $HOME/.config/zsh/plugins/fsh/fast-syntax-highlighting.plugin.zsh
