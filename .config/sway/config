@@ -3,12 +3,14 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
-font pango: SourceCodePro Medium 12
+font pango: Fira Code Medium 12
 exec_always autotiling
+exec mako
+exec bluetoothctl power on
 
 gaps inner 2
 gaps outer 2
-default_border pixel 2
+default_border pixel 4
 
 ### Variables
 #
@@ -29,11 +31,20 @@ set $menu wofi --show run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output DP-4 bg ~/Downloads/502336.jpg fill
+output DP-3 bg ~/Downloads/502299.jpg fill
+output eDP-1 bg ~/Downloads/vim-1.png fill
 #
 # Example configuration:
 #
-output Virtual-1 resolution 1920x1080 position 1920,0
+output eDP-1 resolution 1920x1080 position 4480,0
+output DP-4 resolution 2560x1440@70Hz position 1920,0
+output DP-3 resolution 1920x1080 position 0,0
+
+workspace 1 output DP-3 
+workspace 2 output DP-4 
+workspace 3 output eDP-1 
+
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -41,10 +52,10 @@ output Virtual-1 resolution 1920x1080 position 1920,0
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+         timeout 300000 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -61,7 +72,8 @@ output Virtual-1 resolution 1920x1080 position 1920,0
 #       middle_emulation enabled
 #   }
 #
-input "type:keyboard" xkb_options caps:swapescape
+input * xkb_numlock enable
+
 
 input * accel_profile flat 
 input type:touchpad {
@@ -78,6 +90,18 @@ input type:touchpad {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+
+    # Start firefox
+    bindsym $mod+b exec firefox
+
+    # Start thunderbird
+    bindsym $mod+t exec thunderbird
+
+    # Start teams
+    bindsym $mod+Shift+t exec teams
+
+    # Start joplin
+    bindsym $mod+n exec ./.joplin/Joplin.AppImage
 
     # Kill focused window
     bindsym $mod+q kill
@@ -154,7 +178,7 @@ input type:touchpad {
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    bindsym $mod+c splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
@@ -220,6 +244,7 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+bindsym $mod+Escape exec swaylock --screenshots	--clock	--indicator	--indicator-radius 100	--indicator-thickness 7	--effect-blur 7x5 --effect-vignette 0.5:0.5	--ring-color ff5733	--key-hl-color 880033 --line-color 00000000	--inside-color 00000088	--separator-color 00000000	--grace 1 --font "Fira Code" --fade-in 0.2
 #
 # Status Bar:
 #
@@ -231,5 +256,6 @@ bar {
 include /etc/sway/config.d/*
 
 input type:keyboard {
-	xkb_layout de
+    xkb_layout us,de
+    xkb_options grp:win_space_toggle,caps:escape
 }
