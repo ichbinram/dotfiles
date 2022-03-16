@@ -1,5 +1,7 @@
 # Window Customization
 window:
+  dynamic_title: true
+  opacity: 0.95
   dimensions:
     columns: 140
     lines: 38
@@ -10,8 +12,6 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-background_opacity: 0.95
-window.dynamic_title: true
 
 # Font Customization
 font:
