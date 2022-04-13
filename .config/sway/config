@@ -31,8 +31,9 @@ set $menu wofi --show run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output DP-4 bg ~/Downloads/502336.jpg fill
-output DP-3 bg ~/Downloads/502299.jpg fill
+#output DP-4 bg ~/Downloads/502336.jpg fill
+#output DP-3 bg ~/Downloads/502299.jpg fill
+output * bg ~/Downloads/6245bea439a73.jpg fill
 output eDP-1 bg ~/Downloads/vim-1.png fill
 #
 # Example configuration:
@@ -44,6 +45,8 @@ output DP-3 resolution 1920x1080 position 0,0
 workspace 1 output DP-3 
 workspace 2 output DP-4 
 workspace 3 output eDP-1 
+
+bindsym $mod+Shift+d exec ~/.config/sway/disp_toggle.sh eDP-1
 
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
@@ -98,7 +101,7 @@ input type:touchpad {
     bindsym $mod+t exec thunderbird
 
     # Start teams
-    bindsym $mod+Shift+t exec teams
+    bindsym $mod+Shift+t exec teams-for-linux
 
     # Start joplin
     bindsym $mod+n exec ./.joplin/Joplin.AppImage
