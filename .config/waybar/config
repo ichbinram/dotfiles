@@ -1,120 +1,75 @@
 {
-    "layer": "bottom",
-    "position": "top",
-    "height": 30,
-
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["custom/spotify", "custom/weather", "custom/mail", "custom/storage", "pulseaudio", "network", "battery", "clock", "tray"],
-    "sway/mode": {
-        "format": " {}"
-    },
-    "sway/workspaces": {
-        "format": "{name}",
-        "disable-scroll": true
-    },
-    "sway/window": {
-        "max-length": 80,
-        "tooltip": false
-    },
-    "clock": {
-        "format": "{:%a %d %b %H:%M}",
-        "tooltip": false
-    },
-    "battery": {
-        "format": "{capacity}% {icon}",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
-        "interval": 30,
-        "states": {
-            "warning": 25,
-            "critical": 10
-        },
-        "tooltip": false
-    },
-    "network": {
-        "format": "{icon}",
-        "format-alt": "{ipaddr}/{cidr} {icon}",
-        "format-alt-click": "click-right",
+    "position": "top", 
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["custom/spotify"],
+    "modules-right": ["network", "pulseaudio", "battery", "clock","tray"],
+    // Modules configuration
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": false,
+		"format": "{icon} {name} ",
         "format-icons": {
-            "wifi": ["", "" ,""],
-            "ethernet": [""],
-            "disconnected": [""]
-        },
-        "on-click": "termite -e nmtui",
-    "tooltip": false
-    },
-    "pulseaudio": {
-        "format": "{icon}",
-        "format-alt": "{volume} {icon}",
-        "format-alt-click": "click-right",
-        "format-muted": "",
-        "format-icons": {
-            "phone": [" ", " ", " ", " "],
-            "default": ["", "", "", ""]
-        },
-        "scroll-step": 10,
-        "on-click": "pavucontrol",
-        "tooltip": false
+            "default": "",
+            "urgent": "",
+            "focused": "",
+         }
+     },
+    "custom/vpn": {
+    	"format": "{}",
+        "interval": 1,
+        "exec": "/home/ichbinram/.config/waybar/waybar-vpn.sh"
     },
     "custom/spotify": {
+    	"format": "<span foreground='#E5B4E2'>ﱘ </span><span font='Firacode Nerd Font weight=325'>{}</span>",
         "interval": 1,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/spotify.sh",
         "exec-if": "pgrep spotify",
-        "escape": true
+        "on-click": "playerctl -p spotify play-pause",
+        "on-scroll-up": "playerctl -p spotify previous",
+        "on-scroll-down": "playerctl -p spotify next",
+        "tooltip": false,
+        "escape": true,
+        "max-length": 60,
+        "exec": "/home/ichbinram/.config/waybar/mediaplayer.sh"
     },
-    "custom/storage": {
-        "format": "{} ",
-        "format-alt": "{percentage}% ",
-        "format-alt-click": "click-right",
-        "return-type": "json",
-        "interval": 60,
-        "exec": "~/.config/waybar/modules/storage.sh"
-    },
-    "backlight": {
-        "format": "{icon}",
-        "format-alt": "{percent}% {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": ["", ""],
-        "on-scroll-down": "light -A 1",
-        "on-scroll-up": "light -U 1"
-    },
-    "custom/weather": {
-        "format": "{}",
-        "format-alt": "{alt}: {}",
-        "format-alt-click": "click-right",
-        "interval": 1800,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/weather.sh",
-        "exec-if": "ping wttr.in -c1"
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
+	"clock": {
+		"format": "<span foreground='#C6AAE8'> </span>{:%a %d %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+	},
+	"battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15,
+        	},
+		    "format": "<span size='13000' foreground='#B1E3AD'>{icon}</span> {capacity}%",
+		    "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon}</span> {capacity}%",
+		    "format-critical": "<span size='13000' foreground='#E38C8F'>{icon}</span> {capacity}%",
+		    "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+		    "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+		    "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon}</span> {time}",
+		    "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+        	"format-icons": ["", "", "", "", ""],
+            "tooltip-format": "{time}"
+	},
+	"network": {
+        "format-wifi": "<span size='13000' foreground='#F2CECF'> </span>{essid}",
+        "format-ethernet": "<span size='13000' foreground='#F2CECF'></span> {essid}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "<span size='13000' foreground='#F2CECF'> </span>Disconnected",
+		"tooltip-format-wifi": "Signal Strenght: {signalStrength}%",
+	},
+	"pulseaudio": {
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"format": "<span size='13000' foreground='#EBDDAA'>{icon}</span> {volume}%",
+        "format-muted": "<span size='14000' foreground='#EBDDAA'></span> Muted",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
         },
-        "tooltip": false
     },
-    "custom/mail": {
-        "format": "",
-        "format-alt": "{alt} ",
-        "format-alt-click": "click-right",
-        "interval": 60,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/mail.py",
-        "tooltip": false
-    },
-    "custom/test": {
-        "format": "{}",
-        "exec": "/tmp/test blub",
-        "param": "blah",
-        "interval": 5
-    },
-    "tray": {
-        "icon-size": 18
-    }
 }
 
