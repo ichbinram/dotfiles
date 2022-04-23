@@ -149,11 +149,11 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey },            "r",     function () 
-        awful.util.spawn("dmenu_run -h 28") end,
+        awful.util.spawn("rofi -show run") end,
               {description = "run dmenu", group = "launcher"}),
     awful.key({ modkey },            "b",     function () 
-        awful.util.spawn("brave") end,
-              {description = "open a brave instance", group = "launcher"}),
+        awful.util.spawn("firefox") end,
+              {description = "open a firefox instance", group = "launcher"}),
 })
 
 -- Tags related keybindings
