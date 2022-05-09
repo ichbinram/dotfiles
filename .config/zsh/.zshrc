@@ -6,6 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # General settings
+export SPICETIFY_INSTALL="$HOME/.spicetify"
 export TERM="xterm-256color"
 export HISTFILE=$HOME/.config/zsh/.zsh_history
 export HISTFILESIZE=1000000
@@ -18,7 +19,7 @@ setopt HIST_VERIFY
 setopt SHARE_HISTORY
 
 export EDITOR='nvim'
-export TERMINAL='alacritty'
+export TERMINAL='kitty'
 export BROWSER='firefox'
 export MANPAGER='nvim +Man!'
 #autoload -Uz compinit && compinit
@@ -32,7 +33,7 @@ autoload -Uz compinit && compinit
 autoload promptinit
 promptinit
 #prompt bigfade
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
@@ -54,13 +55,13 @@ source $HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source $HOME/.config/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # Fast syntax-highlighting
-source $HOME/.config/zsh/plugins/fsh/fast-syntax-highlighting.plugin.zsh
+source $HOME/.config/zsh/plugins/fsh/f-sy-h.plugin.zsh
 
 # Changing "ls" to "exa"
-alias ls="exa -al --color=always --group-directories-first" # my preferred listing
-alias la="exa -a --color=always --group-directories-first"  # all files and dirs
-alias ll="exa -l --color=always --group-directories-first"  # long format
-alias lt="exa -aT --color=always --group-directories-first" # tree listing
+alias ls="exa -al --color=always --icons --group-directories-first" # my preferred listing
+alias la="exa -a --color=always  --icons --group-directories-first"  # all files and dirs
+alias ll="exa -l --color=always  --icons --group-directories-first"  # long format
+alias lt="exa -aT --color=always  --icons --group-directories-first" # tree listing
 alias l.='exa -a | egrep "^\."'
 
 # Aliases
@@ -71,3 +72,19 @@ alias c="clear"
 alias r="source ~/.config/zsh/.zshrc && clear"
 alias f="ranger"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ichbinram/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ichbinram/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ichbinram/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ichbinram/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
