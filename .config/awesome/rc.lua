@@ -132,7 +132,7 @@ mytextclock = wibox.widget.textclock()
 -- @DOC_FOR_EACH_SCREEN@
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table.
-    awful.tag({ "w", "e", "s", "o", "m", "e", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -256,14 +256,18 @@ awful.keyboard.append_global_keybindings({
               {description = "show the menubar", group = "launcher"}),
     awful.key({ modkey },            "b",     function () awful.spawn(browser) end,
               {description = "run prompt", group = "launcher"}),
+    awful.key({  }, "XF86AudioPlay", function() awful.spawn.with_shell('playerctl -a play-pause') end,
+              {description = "play-pause", group = "awesome"}),
+    awful.key({  }, "XF86AudioNext", function() awful.spawn.with_shell('playerctl -a next') end,
+              {description = "play next", group = "awesome"}),
+    awful.key({  }, "XF86AudioPrev", function() awful.spawn.with_shell('playerctl -a previous') end,
+              {description = "play previous", group = "awesome"}),
     awful.key({  }, "XF86AudioLowerVolume", function() awful.spawn.with_shell('amixer set Master 5%-') end,
               {description = "lower volume by 5%", group = "awesome"}),
     awful.key({  }, "XF86AudioRaiseVolume", function() awful.spawn.with_shell('amixer set Master 5%+') end,
               {description = "Raise volume by 5%", group = "awesome"}),
     awful.key({  }, "XF86AudioMute", function() awful.spawn.with_shell('amixer set Master toggle') end,
               {description = "Toggle Mute", group = "awesome"}),
-    awful.key({  }, "XF86XK_AudioMicMute", function() awful.spawn.with_shell('amixer set Capture toggle') end,
-              {description = "Mute Microphone", group = "awesome"}),
     awful.key({  }, "XF86MonBrightnessUp", function() awful.spawn.with_shell('brightnessctl set 5%+') end,
               {description = "Increase brightness by 5%", group = "awesome"}),
     awful.key({  }, "XF86MonBrightnessDown", function() awful.spawn.with_shell('brightnessctl set 5%-') end,
