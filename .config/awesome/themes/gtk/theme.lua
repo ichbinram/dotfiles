@@ -237,7 +237,7 @@ theme.taglist_fg_occupied = "#164b5d"
 theme.taglist_fg_urgent   = "#ED7572"
 theme.taglist_fg_empty    = "#828282"
 theme.taglist_spacing     = 2
-theme.taglist_font = "awesomewm-font 13"
+theme.taglist_font = "awesomewmfont 13"
 
 
 theme.taglist_bg_empty = mix(
