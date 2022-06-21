@@ -18,6 +18,9 @@ local naughty = require("naughty")
 local ruled = require("ruled")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+-- Widget libraries
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -44,6 +47,8 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "gtk/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 browser = "firefox"
+alt_browser = "brave-browser"
+explorer = "thunar"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -204,6 +209,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             s.mytasklist, -- Middle widget
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
+                volume_widget{widget_type = 'arc',device='pipewire'},
                 mykeyboardlayout,
                 wibox.widget.systray(),
                 mytextclock,
@@ -248,6 +254,8 @@ awful.keyboard.append_global_keybindings({
               {description = "lua execute prompt", group = "awesome"}),
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey,           }, "e", function () awful.spawn(explorer) end,
+              {description = "open file explorer", group = "launcher"}),
     awful.key({ modkey },            "d",     function () awful.spawn('rofi -show drun') end,
               {description = "run prompt", group = "launcher"}),
     awful.key({ modkey }, "p", function() awful.spawn.with_shell('flameshot full -p $HOME/Pictures') end,
@@ -255,7 +263,9 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, "Shift" }, "p", function() awful.spawn.with_shell('flameshot gui -p $HOME/Pictures') end,
               {description = "show the menubar", group = "launcher"}),
     awful.key({ modkey },            "b",     function () awful.spawn(browser) end,
-              {description = "run prompt", group = "launcher"}),
+              {description = "launch firefox", group = "launcher"}),
+    awful.key({ modkey,"Shift" },            "b",     function () awful.spawn(alt_browser) end,
+              {description = "launch brave browser", group = "launcher"}),
     awful.key({  }, "XF86AudioPlay", function() awful.spawn.with_shell('playerctl -a play-pause') end,
               {description = "play-pause", group = "awesome"}),
     awful.key({  }, "XF86AudioNext", function() awful.spawn.with_shell('playerctl -a next') end,
